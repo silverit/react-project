@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@containers/*": ["containers/*"],
+      "@hooks/*": ["hooks/*"],
+      "@providers/*": ["providers/*"],
+      "@services/*": ["services/*"],
+      // "@translations/*": ["translations/*"],
+      "@styles/*": ["styles/*"],
+      "@type/*": ["type/*"],
+      "@gstyles/*": ["gstyles/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "incremental": true
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "gstyles/tailwind/index.js",
+    "gstyles/styleguide/fontSize.js",
+    "gstyles/styleguide/colors.js"
+  ]
+}

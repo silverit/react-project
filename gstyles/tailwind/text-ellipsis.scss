@@ -1,0 +1,17 @@
+@for $i from 1 to 10 {
+  .text-ellipsis-#{$i} {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: initial;
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+  }
+  .text-ellipsis-#{$i}:before {
+    content: '';
+    display: block;
+  }
+}
