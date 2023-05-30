@@ -1,7 +1,7 @@
-import config from '@utils/config';
-import helper from '@utils/helper';
-import _ from 'lodash';
-import querystring from 'qs';
+import config from "@utils/config";
+import helper from "@utils/helper";
+import _ from "lodash";
+import querystring from "qs";
 let cacheStore: any = {};
 type TypeMapStatus = {
   200: string;
@@ -9,13 +9,13 @@ type TypeMapStatus = {
   [key: string | number]: any;
 };
 const MAP_STATUS: TypeMapStatus = {
-  200: 'success',
-  204: 'success',
+  200: "success",
+  204: "success",
 };
 const normalizeParams = (params: any, opts?: string[]) => {
-  const page = _.get(params, 'page');
-  const pageSize = _.get(params, 'pageSize');
-  params = _.omit(params, ['page', 'pageSize']);
+  const page = _.get(params, "page");
+  const pageSize = _.get(params, "pageSize");
+  params = _.omit(params, ["page", "pageSize"]);
   let pagination = {};
   if (!_.isUndefined(page) && !_.isUndefined(pageSize)) {
     pagination = {
@@ -27,12 +27,12 @@ const normalizeParams = (params: any, opts?: string[]) => {
   if (!_.isEmpty(opts)) {
     params = _.pick(
       params,
-      _.union(opts, ['pagination', 'sort', 'q', 'filter'])
+      _.union(opts, ["pagination", "sort", "q", "filter"])
     );
   }
   params = _(params)
     .omitBy(_.isUndefined)
-    .omitBy((val) => val === '')
+    .omitBy((val) => val === "")
     .value();
   return params;
 };
@@ -40,19 +40,19 @@ const normalizeParams = (params: any, opts?: string[]) => {
 export const qs = {
   stringify: (url: string, params?: object): string => {
     if (_.isString(url)) {
-      if (_.isEqual(_.last(url), '/')) url = url.slice(0, -1);
+      if (_.isEqual(_.last(url), "/")) url = url.slice(0, -1);
       params = normalizeParams(params);
       const query = querystring.stringify(
         _(params)
           .omitBy(_.isUndefined)
-          .omitBy((val) => val === '')
+          .omitBy((val) => val === "")
           .value(),
         {
           encodeValuesOnly: true,
           skipNulls: true,
         }
       );
-      return `${url}${query ? `?${query}` : ''}`;
+      return `${url}${query ? `?${query}` : ""}`;
     }
     return ``;
   },
@@ -72,12 +72,12 @@ class APIService {
   }
   updateConfig(config: any) {
     this.config = _.assign(this.config, { ...config });
-    console.log('this config', this.config);
+    console.log("this config", this.config);
   }
 
   getToken() {
-    if (typeof localStorage !== 'undefined') {
-      return JSON.parse(localStorage.getItem('@store::authToken') || '""');
+    if (typeof localStorage !== "undefined") {
+      return JSON.parse(localStorage.getItem("@store::authToken") || '""');
     }
   }
   getHeader(headers: any = {}) {
@@ -85,14 +85,14 @@ class APIService {
     if (!!token) {
       headers.authorization = `Bearer ${token}`;
     }
-    if (!_.isEmpty(_.get(this.config, 'organization_id'))) {
-      headers['X-TSN-Company'] = this.config.organization_id;
+    if (!_.isEmpty(_.get(this.config, "organization_id"))) {
+      headers["X-TSN-Company"] = this.config.organization_id;
     }
     return headers;
   }
   getEndpoint(url: string) {
     const internal = helper.isInternal(url);
-    return internal ? `${_.get(this.config, 'baseUrl')}${url}` : url;
+    return internal ? `${_.get(this.config, "baseUrl")}${url}` : url;
   }
   async get(
     url: string,
@@ -100,22 +100,22 @@ class APIService {
   ) {
     try {
       const urlQuery = qs.stringify(url, params);
-      let cacheKey = JSON.stringify({ url, urlQuery, method: 'GET' });
+      let cacheKey = JSON.stringify({ url, urlQuery, method: "GET" });
       if (cache && cacheStore[cacheKey]) {
         return cacheStore[cacheKey];
       }
       headers = this.getHeader(headers);
       const endpoint = this.getEndpoint(urlQuery);
       const response = await fetch(endpoint, {
-        method: 'GET',
+        method: "GET",
         headers,
-        credentials: 'include',
+        credentials: "include",
         ...config,
       });
       const result = await response.json();
       cacheStore[cacheKey] = result;
       return {
-        status: MAP_STATUS[response.status] || 'fail',
+        status: MAP_STATUS[response.status] || "fail",
         statusCode: response.status,
         ...result,
       };
@@ -124,7 +124,7 @@ class APIService {
       return {
         success: false,
         message:
-          'Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.',
+          "Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.",
         error,
       };
     }
@@ -136,7 +136,7 @@ class APIService {
       body: bodyData,
       attach,
       headers,
-      type = 'default',
+      type = "default",
       ...config
     }: any = {}
   ) {
@@ -149,7 +149,7 @@ class APIService {
         });
       }
       headers = this.getHeader({
-        Accept: 'application/json',
+        Accept: "application/json",
         ...headers,
       });
       if (!_.isEmpty(bodyData)) {
@@ -161,7 +161,7 @@ class APIService {
       if (!_.isEmpty(attach)) {
         // Server need to support for field name 'images'.
         _.map(attach, (file) => {
-          formData.append('images', file, file.name);
+          formData.append("images", file, file.name);
         });
       }
 
@@ -169,35 +169,35 @@ class APIService {
       const handler: any = {
         form: async () => {
           const response = await fetch(endpoint, {
-            method: 'POST',
+            method: "POST",
             headers: headers,
             body: formData,
-            credentials: 'include',
+            credentials: "include",
             ...config,
           });
 
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
         },
         default: async () => {
           headers = this.getHeader({
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             ...headers,
           });
           const response = await fetch(endpoint, {
-            method: 'POST',
+            method: "POST",
             headers: headers,
-            credentials: 'include',
+            credentials: "include",
             body: JSON.stringify({ ...bodyData }),
             ...config,
           });
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
@@ -209,7 +209,7 @@ class APIService {
       return {
         success: false,
         message:
-          'Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.',
+          "Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.",
         error,
       };
     }
@@ -221,7 +221,7 @@ class APIService {
       body: bodyData,
       attach,
       headers,
-      type = 'default',
+      type = "default",
       ...config
     }: any = {}
   ) {
@@ -233,7 +233,7 @@ class APIService {
         });
       }
       headers = this.getHeader({
-        Accept: 'application/json',
+        Accept: "application/json",
         ...headers,
       });
       const token = this.getToken();
@@ -248,41 +248,41 @@ class APIService {
       if (!_.isEmpty(attach)) {
         // Server need to support for field name 'images'.
         _.map(attach, (file) => {
-          formData.append('image', file, file.name);
+          formData.append("image", file, file.name);
         });
       }
       const endpoint = this.getEndpoint(url);
       const handler: any = {
         form: async () => {
           const response = await fetch(endpoint, {
-            method: 'PUT',
+            method: "PUT",
             headers: headers,
             body: formData,
-            credentials: 'include',
+            credentials: "include",
             ...config,
           });
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
         },
         default: async () => {
           headers = this.getHeader({
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             ...headers,
           });
           const response = await fetch(endpoint, {
-            method: 'PUT',
+            method: "PUT",
             headers: headers,
-            credentials: 'include',
+            credentials: "include",
             body: JSON.stringify({ ...bodyData }),
             ...config,
           });
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
@@ -293,7 +293,7 @@ class APIService {
       return {
         success: false,
         message:
-          'Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.',
+          "Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.",
         error,
       };
     }
@@ -305,7 +305,7 @@ class APIService {
       body: bodyData,
       attach,
       headers,
-      type = 'default',
+      type = "default",
       ...config
     }: any = {}
   ) {
@@ -317,7 +317,7 @@ class APIService {
         });
       }
       headers = this.getHeader({
-        Accept: 'application/json',
+        Accept: "application/json",
         ...headers,
       });
       const token = this.getToken();
@@ -332,41 +332,41 @@ class APIService {
       if (!_.isEmpty(attach)) {
         // Server need to support for field name 'images'.
         _.map(attach, (file) => {
-          formData.append('image', file, file.name);
+          formData.append("image", file, file.name);
         });
       }
       const endpoint = this.getEndpoint(url);
       const handler: any = {
         form: async () => {
           const response = await fetch(endpoint, {
-            method: 'DELETE',
+            method: "DELETE",
             headers: headers,
             body: formData,
-            credentials: 'include',
+            credentials: "include",
             ...config,
           });
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
         },
         default: async () => {
           headers = this.getHeader({
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             ...headers,
           });
           const response = await fetch(endpoint, {
-            method: 'DELETE',
+            method: "DELETE",
             headers: headers,
-            credentials: 'include',
+            credentials: "include",
             body: JSON.stringify({ ...bodyData }),
             ...config,
           });
           const result = await response.json();
           return {
-            status: MAP_STATUS[response.status] || 'fail',
+            status: MAP_STATUS[response.status] || "fail",
             statusCode: response.status,
             ...result,
           };
@@ -377,7 +377,7 @@ class APIService {
       return {
         success: false,
         message:
-          'Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.',
+          "Hệ thông đang có lỗi, rất xin lỗi bạn vì bất tiện này, vui lòng thử lại sau.",
         error,
       };
     }
