@@ -159,7 +159,7 @@ routeStore.addRule("productDetail", {
 
 ```javascript
 addRule(<ruleName>, {
-   url: () => string
+   url: () => string,
    breadcrumbs: () => [...]
 })
 ```
