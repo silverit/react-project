@@ -231,13 +231,13 @@ Các quy ước dưới đây đang hỗ trợ cho kiến trúc này, nó mang t
 - Khi có 1 tính năng phát sinh của dự án,dữ liệu sẽ được dùng lại ở nhiều nơi, các flow logic tương đối nhiều và phức tạp, thì ta gơm logic đó thành một `Provider` và trả về một `instance`, mọi thay đổi về logic và dữ liệu thì components sẽ tương tác thông qua các `instance`của `Provider` cung cấp.
 
 - Các tính chất của một `Provider`:
-  - Có thể dùng lại dữ liệu ở nhiều nơi (component khác nhau).
-  - Logic lớn.
+  - Có thể dùng lại dữ liệu, logic ở nhiều nơi (component khác nhau).
+  - Các flow và logic sẽ tương đối nhiều.
   - Hỗ trợ một tính năng lớn cụ thể nào đó. Ví dụ: Authentication, Booking, Payment, Translation, Route,...
 
 ### 7.2 Phân biệt `hook` và `Provider`.
 
-- Cusom `Hook` cũng là dùng để gơm logic chung và sử dụng ở nhiều chỗ đặc điểm của các logic chung này thì thường không quá lớn và phức tạp và có tính độc lập cao hơn `Provider`.
+- Cusom `Hook` cũng là dùng để gơm logic chung và sử dụng ở nhiều chỗ đặc điểm của các logic chung này thì thường không quá lớn, đơn giản và có tính độc lập cao hơn `Provider`.
 
 - Các tính chất của một custom `Hook`:
   - Sử dụng trong functional component cụ thể.
@@ -246,7 +246,7 @@ Các quy ước dưới đây đang hỗ trợ cho kiến trúc này, nó mang t
 
 ### 7.3 Nên define initial language ngay từ đầu.
 
-Đối với các dự án có sử dụng ngôn ngữ mình code dịch thuật khi lên layout ngay từ đầu, để giảm tải công việc cập nhật về sau, việc này sử dụng thông qua `TranslationProvider`.
+Đối với các dự án có nhiều ngôn ngữ, mình nên code luôn phần dịch thuật, khi lên layout ngay từ đầu, để giảm tải công việc cập nhật về sau, việc này sử dụng thông qua `TranslationProvider`.
 
 Ví dụ:
 
