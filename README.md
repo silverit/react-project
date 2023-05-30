@@ -214,7 +214,7 @@ gstyles.icons({name: <tên file>, size, color })
   - `className={!!active ? 'active' : ''}` => `className={cx({'active': !!active})}`
   - `` className={`${class1} ${class2} ${class3}`} `` =>`className={cx(class1, class2, class3)}`.
   - Cách dùng của `classnames`:
-    - Viết nhiều cases: `cx('foo', {xa bar: true, duck: false }, 'baz', { quux: true })` // => 'foo bar baz quux'
+    - Viết nhiều cases: `cx('foo', {'xa bar': true, duck: false }, 'baz', { quux: true })` // => 'foo bar baz quux'
     - Trường hợp bị bỏ qua: `cx(null, false, 'bar', undefined, 0, 1, { baz: null }, '')` // => 'bar 1'
 
 ## 6. Tech stack của dự án
