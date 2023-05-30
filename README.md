@@ -251,10 +251,12 @@ Các quy ước dưới đây đang hỗ trợ cho kiến trúc này, nó mang t
 Ví dụ:
 
 Bước 1: import `useTranslationContext`.
-`import { useTranslationContext } from "@providers/TranslationProvider";`
+
+- `import { useTranslationContext } from "@providers/TranslationProvider";`
 
 Bước 2: sử dụng `useTranslationContext` ở component cần dùng.
-`const { i18n, Trans } = useTranslationContext();`
+
+- `const { i18n, Trans } = useTranslationContext();`
 
 Bước 3: Sử dụng `i18n` hoặc `Trans`tùy mục đích sử dụng.
 
