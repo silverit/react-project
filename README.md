@@ -20,6 +20,7 @@ Vì dự án đang được xây dựng dựa bên NextJS và React ContextAPI d
 5. Về styling và các icons trong dự án. (sử dụng classnames và module.scss, ví dụ về cách sử dụng cx).
 6. Tech stack của dự án: tailwindcss, scss, formik, styled, lodash, classnames.
 7. Các quy ước chung của dự án:
+
    7.1 Như thế nào thì sẽ define thành một Provider.
    7.2 Phân biệt hook và provider.
    7.3 Nên define initial language ngay từ đầu.
