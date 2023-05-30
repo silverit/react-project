@@ -157,7 +157,8 @@ routeStore.addRule("productDetail", {
 
 - Hàm nắm vai trò thêm một số `methods` sẵn vào cho một `route`. Cấu trúc của hàm này sẽ như sau:
 
-```addRule(<ruleName>, {
+```javascript
+addRule(<ruleName>, {
    url: () => string
    breadcrumbs: () => [...]
 })
