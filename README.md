@@ -183,7 +183,7 @@ Trong đó:
 
 ### `breadcrumbs`
 
-- Cho trường hợp mà `addRule` có `method` `breadcrumbs` thì router lúc này có thể call hàm này để sử dụng.
+- Cho trường hợp mà `addRule` có method `breadcrumbs` thì router lúc này có thể call hàm này để sử dụng.
 - Các dùng: `router.breadcrumbs('productDetail', {...})`. Hàm trả về mảng giá trị breadcrumbs tương ứng (việc này cũng tùy thuộc vào người dev setup trước đó ở method breadcrumbs của addRule).
 
 ## 5. Về Styling và Icons
