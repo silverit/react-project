@@ -173,7 +173,7 @@ Trong đó:
 
 ### `toUrl` (\* tương lai sẽ phải đổi tên hàm thành `getUrl` cho hợp ngữ cảnh sử dụng).
 
-- Hàm để trả về url string. Ví dụ: để lấy link `/product-detail` mà mình đã define trước đó trong khi dùng `addRule`.
+- Hàm để trả về url string. Ví dụ: để lấy link `/product-detail/san-pham-1` mà mình đã define trước đó trong khi dùng `addRule`.
 - Cách sử dụng `router.toUrl('productDetail', { slug: 'san-pham-1' })`. Kết quả mình sẽ có một url string như sau: `/en/product-detail/san-pham-1` hoặc `/vi/product-detail/san-pham-1`, tùy vào giá trị `currentLanguage` lúc đó.
 
 ### `push`
