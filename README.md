@@ -45,10 +45,10 @@ const View = () => {
         </Context.Provider>
     );
 }
-const Parent = ({ data }) => {
+const Parent = () => {
     return <ChildOfParent />
 }
-const ChildOfParent = ({ data = [] }) => {
+const ChildOfParent = () => {
     const { data } = React.useContext(Context);
     return <>{data.map((item) => { ...})}</>
 }
