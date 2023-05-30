@@ -183,8 +183,8 @@ Trong đó:
 
 ### `breadcrumbs`
 
-- Cho trường hợp mà `addRule` có `methods` thì router lúc này có thể call hàm này để sử dụng.
-- Các dùng: `router.breadcrumbs('productDetail')`. Hàm trả về mảng giá trị breadcrumbs tương ứng (việc này cũng tùy thuộc vào người dev setup trước đó ở method breadcrumbs của addRule).
+- Cho trường hợp mà `addRule` có `method` `breadcrumbs` thì router lúc này có thể call hàm này để sử dụng.
+- Các dùng: `router.breadcrumbs('productDetail', {...})`. Hàm trả về mảng giá trị breadcrumbs tương ứng (việc này cũng tùy thuộc vào người dev setup trước đó ở method breadcrumbs của addRule).
 
 ## 5. Về Styling và Icons
 
@@ -192,8 +192,8 @@ Trong đó:
 
 - Về styling sẽ có 2 folders chính. Các styling global scss của dự án đang được đặt ở folder `styles`. Các phần config về tailwindcss, icons, colors, fonts và một số styling core thì sẽ đặt ở `gstyles`.
 
-- `styles/globals.scss`file lưu các biết chung (`:root`) các styling chung, và overwrite các thư viện sẽ thông qua file này. Trong file này sẽ add dòng code `@import "@gstyles/tailwind/style.scss";`, các phần nay thông thường sẽ được setup sẵn trong dự án mẫu.
-- `gstyles/style.scss`file cài đặt `font-face` và styling chung `text-ellipsis-<index>` (`index`: 1 -> 10).
+- `styles/globals.scss`file lưu các biến chung (`:root`) các styling chung, và overwrite các thư viện sẽ thông qua file này. Trong file này sẽ add dòng code `@import "@gstyles/tailwind/style.scss";`, các phần nay thông thường sẽ được setup sẵn trong dự án mẫu.
+- `gstyles/tailwind/style.scss`file cài đặt `font-face` và styling chung `text-ellipsis-<index>` (`index`: 1 -> 10).
 - `gstyles/tailwind/index.js` file config của tailwindcss - file này sẽ required `gstyles/styleguide/colors.js`, `gstyles/styleguide/fontSize.js`, `gstyles/styleguide/borderRadius.js` .
 
 ### `gstyles.icons`
@@ -219,8 +219,8 @@ gstyles.icons({name: <tên file>, size, color })
 
 ## 6. Tech stack của dự án
 
-Dự án core sẽ xài một số thư viện: tailwindcss, scss, formik, styled, lodash, classnames.
-Trường hợp các dự án làm anim sẽ có: locomotive-scroll, gsap, swiperjs,
+- Dự án core sẽ xài một số thư viện: tailwindcss, scss, formik, styled, lodash, classnames.
+- Trường hợp các dự án làm anim sẽ có: locomotive-scroll, gsap, swiperjs,
 
 ## 7. Các quy ước chung của dự án.
 
