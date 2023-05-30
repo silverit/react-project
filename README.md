@@ -22,7 +22,9 @@ Vì dự án đang được xây dựng dựa bên NextJS và React ContextAPI d
 7. Các quy ước chung của dự án:
 
    7.1 Như thế nào thì sẽ define thành một Provider.
+
    7.2 Phân biệt hook và provider.
+
    7.3 Nên define initial language ngay từ đầu.
 
 ## 1. Vì sao phải dùng Context API?
