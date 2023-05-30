@@ -223,6 +223,8 @@ Trường hợp các dự án làm anim sẽ có: locomotive-scroll, gsap, swipe
 
 ## 7. Các quy ước chung của dự án.
 
+Các quy ước dưới đây đang hỗ trợ cho kiến trúc này, nó mang tính cá nhân của tác giả, không phải là quy định của `React` về việc hiện thực các mã nguồn (custom `hook`, `Provider`) hay ở các dự án sử dụng `React` khác.
+
 ### 7.1 Khi nào thì sẽ define thành một `Provider`?
 
 - Khi có 1 tính năng phát sinh của dự án,dữ liệu sẽ được dùng lại ở nhiều nơi, các flow logic tương đối nhiều và phức tạp, thì ta gơm logic đó thành một `Provider` và trả về một `instance`, mọi thay đổi về logic và dữ liệu thì components sẽ tương tác thông qua các `instance`của `Provider` cung cấp.
@@ -232,7 +234,7 @@ Trường hợp các dự án làm anim sẽ có: locomotive-scroll, gsap, swipe
   - Logic lớn.
   - Hỗ trợ một tính năng lớn cụ thể nào đó. Ví dụ: Authentication, Booking, Payment, Translation, Route,...
 
-### 7.2 Phân biệt hook và provider.
+### 7.2 Phân biệt `hook` và `Provider`.
 
 - Cusom `Hook` cũng là dùng để gơm logic chung và sử dụng ở nhiều chỗ đặc điểm của các logic chung này thì thường không quá lớn và phức tạp và có tính độc lập cao hơn `Provider`.
 
